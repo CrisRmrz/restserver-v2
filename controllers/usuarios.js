@@ -64,12 +64,17 @@ const usuariosPut = async(req, res = response) => {
 const usuariosDelete = async(req, res = response) => {
 
     const { id } = req.params;
+    
+    const usuarioAutenticado = await req.usuario;
 
     // borrar fisicamente de la base de datos
     //const usuario = await Usuario.findByIdAndDelete( id );//Pero de esta manera no lo vamos a manejar aqui, aqui lo manejamos por estados
     const usuario = await Usuario.findByIdAndUpdate( id, { estado: false }); // Ponemos el estado en false para borrarlo
 
-    res.json(usuario)
+    res.json({
+        usuario,
+        usuarioAutenticado
+    })
 }
 
 module.exports = {

@@ -35,7 +35,8 @@ const UsuarioSchema = Schema({
 
 UsuarioSchema.methods.toJSON = function() { //Esta funcion sirve para excluir el __v y el password para que no se muestre en el res en el postman, pero si se guarda todo en el mongo db
 
-    const { __v, password, ...usuario } = this.toObject();
+    const { __v, password, _id, ...usuario } = this.toObject();
+    usuario.uid = _id; //Visualmente cambiamos el _id por uid para que mueste en opstamn uid en  vez de _id
     return usuario;
 
 }
