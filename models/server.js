@@ -10,7 +10,9 @@ class Server {
 
         this.paths = {
             auth: '/api/auth',
+            buscar: '/api/buscar',
             categorias: '/api/categorias',
+            productos: '/api/productos',
             usuarios: '/api/usuarios'
         }
         
@@ -47,7 +49,9 @@ class Server {
     routes() {
         
         this.app.use(this.paths.auth, require('../routes/auth'));
+        this.app.use(this.paths.buscar, require('../routes/buscar'));
         this.app.use(this.paths.categorias, require('../routes/categorias'));
+        this.app.use(this.paths.productos, require('../routes/productos'));
         this.app.use(this.paths.usuarios, require('../routes/usuarios')); //Asi es como tiene que empezar la ruta cuando hacemos peticiones en postman y en los navegadores por ejemplo localhost:8080/api/usuarios
 
     }

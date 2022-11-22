@@ -1,6 +1,7 @@
 const Categoria = require('../models/categoria');
 const Role = require('../models/role');
-const Usuario = require('../models/usuario')
+const Usuario = require('../models/usuario');
+const Producto = require('../models/producto');
 
 const esRoleValido = async (rol = '') => {  //Validar que solo pueda agregar usuarios con rol que exista en base de datos
     const existeRol = await Role.findOne({ rol });
@@ -39,9 +40,20 @@ const existeCategoriaPorId = async(id = '') => {
 
 }
 
+const existeProductoPorId = async(id = '') => {
+
+    // Verificar si la categoria existe
+    const existeProducto = await Producto.findById( id ); //Me regresa todo el objeto si lo encuentra y si no lo encuentra un null
+    if (!existeProducto) {
+        throw new Error('No existe un producto con ese id');
+    }
+
+}
+
 module.exports = {
     esRoleValido,
     emailExiste,
     existeUsuarioPorId,
-    existeCategoriaPorId
+    existeCategoriaPorId,
+    existeProductoPorId
 }
